@@ -1,0 +1,28 @@
+apiVersion : apps/v1
+kind: Deployment
+
+metadata:
+  name: appointmentservice-deployment
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      server: appointmentservice
+
+
+  template:
+    metadata:
+      labels:
+        server: appointmentservice
+    spec:
+      containers:
+        - name: appointmentservice
+          image: appointmentservice:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 4000
+          env:
+            - name: NODE_ENV
+              value: production
